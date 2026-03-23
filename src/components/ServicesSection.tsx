@@ -1,23 +1,53 @@
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { services } from "@/config/site";
+import { Badge } from "@/components/ui/badge";
 
 const ServicesSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [serviceImages, setServiceImages] = useState<string[]>([]);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.15 }
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.15 },
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadServiceImages = async () => {
+      try {
+        const response = await fetch("/api/services-images", {
+          signal: controller.signal,
+          cache: "no-store",
+        });
+        if (!response.ok) return;
+
+        const data = (await response.json()) as { images?: string[] };
+        setServiceImages(Array.isArray(data.images) ? data.images : []);
+      } catch {
+        setServiceImages([]);
+      }
+    };
+
+    loadServiceImages();
+
+    return () => controller.abort();
+  }, []);
+
   return (
     <section id="servicos" className="py-24 md:py-32 bg-light" ref={ref}>
       <div className="container mx-auto px-4">
-        <div className={`text-center mb-16 ${visible ? "animate-reveal" : "opacity-0"}`}>
+        <div
+          className={`text-center mb-16 ${visible ? "animate-reveal" : "opacity-0"}`}
+        >
           <span className="font-display text-sm uppercase tracking-[0.25em] text-brand">
             O que oferecemos
           </span>
@@ -34,18 +64,40 @@ const ServicesSection = () => {
                 visible ? `animate-reveal delay-${(i + 1) * 100}` : "opacity-0"
               }`}
             >
-              <div className="w-14 h-14 rounded-lg bg-brand-blue/10 flex items-center justify-center mb-6">
-                <s.icon className="w-7 h-7 text-brand-blue" strokeWidth={1.5} />
+              {serviceImages[i] && (
+                <div className="mb-6 overflow-hidden rounded-lg border border-brand-blue/15">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src={serviceImages[i]}
+                      alt={`Imagem de ${s.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="mb-6 flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-brand-blue/10">
+                  <s.icon
+                    className="h-7 w-7 text-brand-blue"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <h3 className="font-display text-2xl font-semibold">
+                  {s.title}
+                </h3>
               </div>
-              <h3 className="font-display text-2xl font-semibold mb-3">{s.title}</h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">{s.description}</p>
+              <p className="text-muted-foreground leading-relaxed mb-6 text-balance">
+                {s.description}
+              </p>
               <ul className="flex flex-wrap gap-2">
                 {s.items.map((item) => (
-                  <li
-                    key={item}
-                    className="text-xs font-medium uppercase tracking-wider bg-brand/10 text-foreground px-3 py-1.5 rounded"
-                  >
-                    {item}
+                  <li key={item}>
+                    <Badge variant="outline" className="px-2.5 py-1 text-[11px]">
+                      {item}
+                    </Badge>
                   </li>
                 ))}
               </ul>
