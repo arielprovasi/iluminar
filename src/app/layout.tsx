@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
+  manifest: "/site.webmanifest",
   title: {
     default: `${siteConfig.businessName} | ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.businessName}`,
@@ -22,11 +23,18 @@ export const metadata: Metadata = {
     siteName: siteConfig.businessName,
     title: `${siteConfig.businessName} | ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: [
+      {
+        url: "/og-image.png",
+        alt: `${siteConfig.businessName} loja em Sorocaba`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.businessName} | ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: ["/og-image.png"],
   },
 };
 
