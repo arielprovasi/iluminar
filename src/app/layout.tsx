@@ -9,6 +9,15 @@ const siteUrl =
 
 const metadataBase = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
 
+/** Static asset in /public — absolute URL helps crawlers and sharing debuggers */
+const ogImage = {
+  url: new URL("/og-image.png", metadataBase).href,
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: `${siteConfig.businessName} — ${siteConfig.tagline} em Sorocaba`,
+} as const;
+
 export const metadata: Metadata = {
   metadataBase,
   manifest: "/site.webmanifest",
@@ -31,11 +40,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.businessName,
     title: siteConfig.seoTitle,
     description: siteConfig.description,
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.seoTitle,
     description: siteConfig.description,
+    images: [ogImage.url],
   },
 };
 
