@@ -5,13 +5,15 @@ import { siteConfig } from "@/config/site";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://iluminar.vercel.app");
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://iluminar-one.vercel.app");
+
+const metadataBase = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase,
   manifest: "/site.webmanifest",
   title: {
-    default: `${siteConfig.businessName} | ${siteConfig.tagline}`,
+    default: siteConfig.seoTitle,
     template: `%s | ${siteConfig.businessName}`,
   },
   description: siteConfig.description,
@@ -24,26 +26,16 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    url: "/",
+    url: new URL("/", metadataBase),
     locale: "pt_BR",
     siteName: siteConfig.businessName,
-    title: `${siteConfig.businessName} | ${siteConfig.tagline}`,
+    title: siteConfig.seoTitle,
     description: siteConfig.description,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        type: "image/png",
-        alt: `${siteConfig.businessName} loja em Sorocaba`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.businessName} | ${siteConfig.tagline}`,
+    title: siteConfig.seoTitle,
     description: siteConfig.description,
-    images: ["/og-image.png"],
   },
 };
 

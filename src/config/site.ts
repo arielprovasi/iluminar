@@ -5,8 +5,10 @@ export const siteConfig = {
   legalName: "Iluminar Materiais Elétricos e Construção",
   city: "Sorocaba - SP",
   tagline: "Materiais elétricos e construção",
+  /** Page title for metadata; tuned for ~50–60 characters in SERP and social tools */
+  seoTitle: "Iluminar | Materiais elétricos e construção em Sorocaba",
   description:
-    "Referência em materiais elétricos, iluminação LED e hidráulica em Sorocaba. Atendimento especializado e produtos de qualidade para obras residenciais, comerciais e industriais.",
+    "Iluminar Sorocaba: elétrica, LED e hidráulica. Atendimento para obras residenciais, comerciais e industriais com produtos de qualidade.",
   addressShort: "Av. Ipanema, 5675 — Jardim Novo Horizonte, Sorocaba — SP",
   addressFull: "Av. Ipanema, 5675 - Jardim Novo Horizonte, Sorocaba - SP, 18071-801",
   phoneLabel: "(15) 99809-5505",
