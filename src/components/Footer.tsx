@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUp, Clock3, MapPin, MessageCircle } from "lucide-react";
 import { navLinks, siteConfig, socialLinks } from "@/config/site";
 import logoIluminar from "@/assets/logo-iluminar.png";
@@ -8,7 +9,7 @@ const Footer = () => (
     <div className="container mx-auto px-4">
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 lg:col-span-2">
-          <a
+          <Link
             href="/"
             className="flex w-full items-center justify-center md:w-auto md:justify-start"
             aria-label={`${siteConfig.businessName} - Voltar ao topo`}
@@ -18,7 +19,7 @@ const Footer = () => (
               alt={`${siteConfig.businessName} logo`}
               className="h-28 w-auto md:h-28"
             />
-          </a>
+          </Link>
           <p className="max-w-xl text-sm leading-relaxed text-white/70 text-balance">
             {siteConfig.description}
           </p>

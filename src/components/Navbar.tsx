@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu } from "lucide-react";
 import { navLinks, siteConfig } from "@/config/site";
 import logoIluminar from "@/assets/logo-iluminar.png";
@@ -31,14 +32,14 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto grid h-16 grid-cols-[auto_1fr_auto] items-center gap-6 px-4 md:h-20 md:px-8">
-        <a href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src={logoIluminar}
             alt={`${siteConfig.businessName} logo`}
             className="h-16 w-auto md:h-16"
             priority
           />
-        </a>
+        </Link>
 
         {/* Desktop */}
         <ul className="hidden items-center justify-center gap-8 md:flex">
