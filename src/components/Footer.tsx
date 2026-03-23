@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Clock3, MapPin, MessageCircle } from "lucide-react";
 import { navLinks, siteConfig, socialLinks } from "@/config/site";
-import logoIluminar from "@/assets/logo-iluminar.png";
 
 const Footer = () => (
   <footer className="bg-dark border-t border-white/10 py-14">
@@ -15,8 +14,10 @@ const Footer = () => (
             aria-label={`${siteConfig.businessName} - Voltar ao topo`}
           >
             <Image
-              src={logoIluminar}
+              src="/logo-iluminar.png"
               alt={`${siteConfig.businessName} logo`}
+              width={1426}
+              height={802}
               className="h-28 w-auto md:h-28"
             />
           </Link>

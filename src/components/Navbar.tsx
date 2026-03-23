@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { navLinks, siteConfig } from "@/config/site";
-import logoIluminar from "@/assets/logo-iluminar.png";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 const Navbar = () => {
@@ -34,8 +33,10 @@ const Navbar = () => {
       <div className="container mx-auto grid h-16 grid-cols-[auto_1fr_auto] items-center gap-6 px-4 md:h-20 md:px-8">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={logoIluminar}
+            src="/logo-iluminar.png"
             alt={`${siteConfig.businessName} logo`}
+            width={1426}
+            height={802}
             className="h-16 w-auto md:h-16"
             priority
           />
