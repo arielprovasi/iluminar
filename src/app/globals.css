@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 46 96% 53%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 207 91% 31%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 40 10% 94%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 46 96% 53%;
+    --accent-foreground: 0 0% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
+    --ring: 46 96% 53%;
+
+    --radius: 0.5rem;
+
+    --iluminar-yellow: 48 94% 50%;
+    --iluminar-yellow-light: 46 96% 62%;
+    --iluminar-yellow-dark: 46 96% 44%;
+    --iluminar-blue: 207 91% 31%;
+    --iluminar-blue-light: 207 76% 40%;
+    --iluminar-blue-dark: 207 94% 24%;
+    --iluminar-black: 0 0% 8%;
+    --iluminar-dark: 0 0% 12%;
+    --iluminar-gray: 0 0% 40%;
+    --iluminar-light: 40 20% 97%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', system-ui, sans-serif;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+}
+
+@layer utilities {
+  .section-dark {
+    @apply bg-foreground text-background;
+  }
+  .text-brand {
+    color: hsl(var(--iluminar-yellow));
+  }
+  .bg-brand {
+    background-color: hsl(var(--iluminar-yellow));
+  }
+  .bg-brand-dark {
+    background-color: hsl(var(--iluminar-yellow-dark));
+  }
+  .bg-dark {
+    background-color: hsl(var(--iluminar-black));
+  }
+  .text-brand-blue {
+    color: hsl(var(--iluminar-blue));
+  }
+  .bg-brand-blue {
+    background-color: hsl(var(--iluminar-blue));
+  }
+  .bg-brand-blue-dark {
+    background-color: hsl(var(--iluminar-blue-dark));
+  }
+  .border-brand-blue {
+    border-color: hsl(var(--iluminar-blue));
+  }
+  .bg-darker {
+    background-color: hsl(var(--iluminar-dark));
+  }
+  .bg-light {
+    background-color: hsl(var(--iluminar-light));
+  }
+  .text-gray-brand {
+    color: hsl(var(--iluminar-gray));
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-reveal {
+  animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-100 { animation-delay: 80ms; }
+.delay-200 { animation-delay: 160ms; }
+.delay-300 { animation-delay: 240ms; }
+.delay-400 { animation-delay: 320ms; }
