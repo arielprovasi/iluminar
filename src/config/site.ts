@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Award, Clock, Droplets, Facebook, Instagram, Lightbulb, MapPin, Phone, ShieldCheck, Users, Zap } from "lucide-react";
 
 export const siteConfig = {
@@ -20,7 +21,67 @@ export const siteConfig = {
   instagramLabel: "@iluminareletricasorocaba",
   instagramUrl: "https://www.instagram.com/iluminareletricasorocaba/",
   facebookUrl: "https://www.facebook.com/61580208818149",
-};
+  /** File in /public — Open Graph & Twitter Card (absolute URL via metadataBase) */
+  ogImagePath: "/og-image.png",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+} as const;
+
+function resolveSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (fromEnv) {
+    return fromEnv.replace(/\/+$/, "");
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL.replace(/^https?:\/\//, "")}`;
+  }
+  return "https://iluminar-one.vercel.app";
+}
+
+/** Root `metadata` for `app/layout.tsx` (title, OG, Twitter, keywords, etc.) */
+export function getRootMetadata(): Metadata {
+  const siteUrl = resolveSiteUrl();
+  const metadataBase = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
+  const ogImage = {
+    url: new URL(siteConfig.ogImagePath, metadataBase).href,
+    width: siteConfig.ogImageWidth,
+    height: siteConfig.ogImageHeight,
+    type: "image/png",
+    alt: `${siteConfig.businessName} — ${siteConfig.tagline} em Sorocaba`,
+  } as const;
+
+  return {
+    metadataBase,
+    manifest: "/site.webmanifest",
+    title: {
+      default: siteConfig.seoTitle,
+      template: `%s | ${siteConfig.businessName}`,
+    },
+    description: siteConfig.description,
+    keywords: [
+      "materiais eletricos",
+      "iluminacao led",
+      "hidraulica",
+      "construcao",
+      "sorocaba",
+    ],
+    openGraph: {
+      type: "website",
+      url: new URL("/", metadataBase),
+      locale: "pt_BR",
+      siteName: siteConfig.businessName,
+      title: siteConfig.seoTitle,
+      description: siteConfig.description,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.seoTitle,
+      description: siteConfig.description,
+      images: [ogImage.url],
+    },
+  };
+}
 
 export const navLinks = [
   { label: "Início", href: "#inicio" },
