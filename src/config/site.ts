@@ -21,7 +21,7 @@ export const siteConfig = {
   instagramLabel: "@iluminareletricasorocaba",
   instagramUrl: "https://www.instagram.com/iluminareletricasorocaba/",
   facebookUrl: "https://www.facebook.com/61580208818149",
-  /** File in /public — Open Graph & Twitter Card (absolute URL via metadataBase) */
+  /** Static file in /public — resolved to absolute URL via `metadataBase` in metadata */
   ogImagePath: "/og-image.png",
   ogImageWidth: 1200,
   ogImageHeight: 630,
@@ -42,13 +42,7 @@ function resolveSiteUrl(): string {
 export function getRootMetadata(): Metadata {
   const siteUrl = resolveSiteUrl();
   const metadataBase = new URL(siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`);
-  const ogImage = {
-    url: new URL(siteConfig.ogImagePath, metadataBase).href,
-    width: siteConfig.ogImageWidth,
-    height: siteConfig.ogImageHeight,
-    type: "image/png",
-    alt: `${siteConfig.businessName} — ${siteConfig.tagline} em Sorocaba`,
-  } as const;
+  const ogAlt = `${siteConfig.businessName} — ${siteConfig.tagline} em Sorocaba`;
 
   return {
     metadataBase,
@@ -72,13 +66,20 @@ export function getRootMetadata(): Metadata {
       siteName: siteConfig.businessName,
       title: siteConfig.seoTitle,
       description: siteConfig.description,
-      images: [ogImage],
+      images: [
+        {
+          url: siteConfig.ogImagePath,
+          width: siteConfig.ogImageWidth,
+          height: siteConfig.ogImageHeight,
+          alt: ogAlt,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: siteConfig.seoTitle,
       description: siteConfig.description,
-      images: [ogImage.url],
+      images: [siteConfig.ogImagePath],
     },
   };
 }
