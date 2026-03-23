@@ -55,9 +55,12 @@ export const metadata: Metadata = {
     siteName: siteConfig.businessName,
     title: siteConfig.seoTitle,
     description: siteConfig.description,
+    // JPEG (~70KB): WhatsApp and other messengers often drop previews when og:image exceeds ~300KB.
+    // Source artwork remains `public/og-image.png`; regenerate `og-image.jpg` via `npm run optimize-og`.
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
+        type: "image/jpeg",
         width: 1200,
         height: 630,
         alt: "Iluminar — Materiais elétricos e construção em Sorocaba",
@@ -68,6 +71,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.seoTitle,
     description: siteConfig.description,
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
