@@ -13,10 +13,10 @@ export const navLinks = [
 ];
 
 export const heroHighlights = [
-  { icon: "⚡", label: "Elétrica" },
-  { icon: "💡", label: "Iluminação" },
-  { icon: "🚰", label: "Hidráulica" },
-];
+  { Icon: Zap, label: "Elétrica" },
+  { Icon: Lightbulb, label: "Iluminação" },
+  { Icon: Droplets, label: "Hidráulica" },
+] as const;
 
 export const services = [
   {

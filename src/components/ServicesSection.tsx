@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 const ServicesSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [serviceImages, setServiceImages] = useState<string[]>([]);
+  const [serviceImages, setServiceImages] = useState<(string | null)[]>([]);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -30,7 +30,7 @@ const ServicesSection = () => {
         });
         if (!response.ok) return;
 
-        const data = (await response.json()) as { images?: string[] };
+        const data = (await response.json()) as { images?: (string | null)[] };
         setServiceImages(Array.isArray(data.images) ? data.images : []);
       } catch {
         setServiceImages([]);
@@ -57,52 +57,55 @@ const ServicesSection = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {services.map((s, i) => (
-            <div
-              key={s.title}
-              className={`bg-background rounded-lg p-8 border border-brand-blue/15 shadow-[0_2px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.12)] transition-shadow duration-300 ${
-                visible ? `animate-reveal delay-${(i + 1) * 100}` : "opacity-0"
-              }`}
-            >
-              {serviceImages[i] && (
-                <div className="mb-6 overflow-hidden rounded-lg border border-brand-blue/15">
-                  <div className="relative aspect-[16/9]">
-                    <Image
-                      src={serviceImages[i]}
-                      alt={`Imagem de ${s.title}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
+          {services.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <div
+                key={s.title}
+                className={`bg-background rounded-lg p-8 border border-brand-blue/15 shadow-[0_2px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.12)] transition-shadow duration-300 ${
+                  visible ? `animate-reveal delay-${(i + 1) * 100}` : "opacity-0"
+                }`}
+              >
+                {serviceImages[i] && (
+                  <div className="mb-6 overflow-hidden rounded-lg border border-brand-blue/15">
+                    <div className="relative aspect-[16/9]">
+                      <Image
+                        src={serviceImages[i]}
+                        alt={`Imagem de ${s.title}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="mb-6 flex items-center gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-brand-blue/10">
+                    <Icon
+                      className="h-7 w-7 text-brand-blue"
+                      strokeWidth={1.5}
                     />
                   </div>
+                  <h3 className="font-display text-2xl font-semibold">
+                    {s.title}
+                  </h3>
                 </div>
-              )}
-
-              <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-brand-blue/10">
-                  <s.icon
-                    className="h-7 w-7 text-brand-blue"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <h3 className="font-display text-2xl font-semibold">
-                  {s.title}
-                </h3>
+                <p className="text-muted-foreground leading-relaxed mb-6 text-balance">
+                  {s.description}
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {s.items.map((item) => (
+                    <li key={item}>
+                      <Badge variant="outline" className="px-2.5 py-1 text-[11px]">
+                        {item}
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-6 text-balance">
-                {s.description}
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {s.items.map((item) => (
-                  <li key={item}>
-                    <Badge variant="outline" className="px-2.5 py-1 text-[11px]">
-                      {item}
-                    </Badge>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

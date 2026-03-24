@@ -48,11 +48,17 @@ const HeroSection = () => {
               </a>
             </div>
             <div className="mt-16 grid grid-cols-3 gap-6 md:gap-8 animate-reveal delay-200">
-              {heroHighlights.map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-3xl mb-1">{s.icon}</div>
+              {heroHighlights.map(({ Icon, label }) => (
+                <div key={label} className="text-center">
+                  <div className="mb-2 flex justify-center">
+                    <Icon
+                      className="h-8 w-8 text-brand"
+                      strokeWidth={1.75}
+                      aria-hidden
+                    />
+                  </div>
                   <div className="font-display text-xs uppercase tracking-widest text-white/60">
-                    {s.label}
+                    {label}
                   </div>
                 </div>
               ))}
