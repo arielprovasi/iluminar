@@ -1,0 +1,18 @@
+/* TEAM */
+Company: Iluminar Materiais Elétricos e Construção
+Site: https://iluminarsorocaba.com.br
+Developer: https://www.arielprovasi.com/
+Instagram: https://www.instagram.com/iluminareletricasorocaba/
+Facebook: https://www.facebook.com/61580208818149
+Location: Sorocaba - SP, Brazil
+
+/* CONTACT */
+Phone / WhatsApp: +55 15 99809-5505
+Address: Av. Ipanema, 5675 - Jardim Novo Horizonte, Sorocaba - SP, 18071-801
+Maps: https://maps.app.goo.gl/3RRKXu4pCiLGHoL7A
+
+/* SITE */
+Language: pt-BR
+Stack: Next.js, React, TypeScript, Tailwind CSS, shadcn/ui
+Build: Static export (Next.js output: export)
+Generated: 2026-03-26

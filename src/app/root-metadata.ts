@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site-config";
  * Canonical site origin for metadata (og:url, og:image, Twitter cards).
  * Prefer explicit env, then Vercel's *production* hostname — not `VERCEL_URL`,
  * which is the per-deployment host (e.g. `project-abc123.vercel.app`). Crawlers
- * often fetch the shared link (e.g. `iluminar-one.vercel.app`) but read
+ * often fetch the shared link (e.g. `iluminarsorocaba.com.br`) but read
  * `og:image` as absolute URL; a mismatched or ephemeral deploy host can cause
  * them to fall back to `apple-touch-icon` / `icon.png` (the lamp asset).
  */
@@ -23,7 +23,7 @@ function resolveSiteUrl(): string {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL.replace(/^https?:\/\//, "")}`;
   }
-  return "https://iluminar-one.vercel.app";
+  return "https://iluminarsorocaba.com.br";
 }
 
 const siteUrl = resolveSiteUrl();
