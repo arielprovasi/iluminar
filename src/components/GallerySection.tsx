@@ -65,9 +65,8 @@ const GallerySection = () => {
 
     const loadImages = async () => {
       try {
-        const response = await fetch("/api/gallery", {
+        const response = await fetch("/data/gallery-images.json", {
           signal: controller.signal,
-          cache: "no-store",
         });
         if (!response.ok) return;
 

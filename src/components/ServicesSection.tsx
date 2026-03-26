@@ -24,9 +24,8 @@ const ServicesSection = () => {
 
     const loadServiceImages = async () => {
       try {
-        const response = await fetch("/api/services-images", {
+        const response = await fetch("/data/service-images.json", {
           signal: controller.signal,
-          cache: "no-store",
         });
         if (!response.ok) return;
 
